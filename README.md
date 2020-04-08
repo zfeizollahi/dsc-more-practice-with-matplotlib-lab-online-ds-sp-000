@@ -54,7 +54,8 @@ Import `matplotlib.pyplot` as `plt` and set `%matplotlib inline`  for generating
 
 ```python
 # import matplotlib.pyplot and set inline plotting 
-
+import matplotlib.pyplot as plt
+%matplotlib inline
 ```
 
 Now that we have our data all set and matplotlib in our python environment, we can try some basic plotting techniques.
@@ -69,11 +70,20 @@ Perform the following steps in the cell below:
 
 
 ```python
-
+fig = plt.figure()
+ax = fig.add_axes([0,0,1,1])
+ax.plot(x,y)
 ```
 
 
-![png](index_files/index_5_0.png)
+
+
+    [<matplotlib.lines.Line2D at 0x7ff1b01d11d0>]
+
+
+
+
+![png](index_files/index_5_1.png)
 
 
 This was easy, let's move on to drawing multiple plots within a figure space. 
@@ -87,7 +97,14 @@ Perform following actions:
 
 
 ```python
-
+fig, axes = plt.subplots(nrows=3, ncols=4, figsize=(10,10))
+n = 1
+for i in range(0,3):
+    for j in range(0,4):
+        y = n * x 
+        axes[i][j].plot(x, y)
+        axes[i][j].set_title("{} * x".format(n))
+        n+=1      
 ```
 
 
@@ -101,7 +118,14 @@ Repeat the above exercise, but standardize the axes of all of your subplots so t
 
 
 ```python
-
+fig, axes = plt.subplots(nrows=3, ncols=4, figsize=(10,10), sharey=True)
+n = 1
+for i in range(0,3):
+    for j in range(0,4):
+        y = n * x 
+        axes[i][j].plot(x, y)
+        axes[i][j].set_title("{} * x".format(n))
+        n+=1
 ```
 
 
@@ -121,11 +145,22 @@ Perform following steps in the cell below:
 
 
 ```python
-
+fig = plt.figure(figsize=(8,6))
+ax1 = fig.add_subplot(121)
+ax2 = fig.add_subplot(122)
+ax1.plot(x,y, lw=3, c='red', ls=':')
+ax2.plot(x,z, lw=5, ls='-.')
 ```
 
 
-![png](index_files/index_11_0.png)
+
+
+    [<matplotlib.lines.Line2D at 0x7f9c10814c50>]
+
+
+
+
+![png](index_files/index_11_1.png)
 
 
 ## Exercise 5
@@ -134,7 +169,11 @@ Above figure looks fine but a bit out of proportion. Let's resize this to make t
 
 
 ```python
-
+fig = plt.figure(figsize=(15,8))
+ax1 = fig.add_subplot(121)
+ax2 = fig.add_subplot(122)
+ax1.plot(x,y, lw=3, c='red')
+ax2.scatter(x,z, marker='^');
 ```
 
 
